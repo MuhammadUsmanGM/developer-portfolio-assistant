@@ -18,8 +18,11 @@ Behavior:
 """
 
 import time
+from typing import Optional
 
+from ..a2a_protocol import MessageType, a2a_protocol
 from ..evaluation import get_evaluator
+from ..long_running import OperationStatus, operation_manager
 from ..memory import memory_bank
 from ..utils.logging import log_event
 from .content_generator import content_generator
@@ -27,7 +30,9 @@ from .github_analyzer import github_analyzer
 from .portfolio_writer import portfolio_writer
 
 
-def portfolio_update(username: str) -> dict:
+def portfolio_update(
+    username: str, operation_id: Optional[str] = None, resume: bool = False
+) -> dict:
     """
     Orchestrate the complete portfolio update workflow.
 
@@ -39,6 +44,8 @@ def portfolio_update(username: str) -> dict:
     Each step validates its output before proceeding to the next, preventing
     cascading failures and providing clear error messages.
 
+    Supports long-running operations with pause/resume capabilities.
+
     Behavior:
     1. Analyzes GitHub profile and repositories
     2. Generates portfolio content using Gemini
@@ -48,16 +55,47 @@ def portfolio_update(username: str) -> dict:
 
     Args:
         username (str): GitHub username to update portfolio for
+        operation_id (str, optional): Operation ID for long-running operation tracking
+        resume (bool): Whether to resume a paused operation
 
     Returns:
         dict: Complete workflow results including all intermediate steps
     """
     start_time = time.time()
+
+    # Long-running operation support
+    if operation_id:
+        op = operation_manager.get_operation(operation_id)
+        if resume and op and op.status == OperationStatus.PAUSED:
+            # Resume from checkpoint
+            state = op.resume()
+            summary = state.get("github_summary")
+            log_event(
+                f"Resuming portfolio_update operation {operation_id} for {username}"
+            )
+        else:
+            # Create or get operation
+            if not op:
+                op = operation_manager.create_operation(
+                    operation_id, "portfolio_update", {"username": username}
+                )
+            op.start()
+            summary = None
+    else:
+        op = None
+        summary = None
+
     log_event(f"Running portfolio_update for username: {username}")
 
     # Step 1: Analyze GitHub profile and repositories
     # Design: First step gathers all necessary data for content generation
-    summary = github_analyzer(username)
+    if not summary:
+        summary = github_analyzer(username)
+        if op:
+            op.update_state("github_summary", summary)
+            op.pause(
+                {"step": "github_analysis_complete"}
+            )  # Checkpoint after GitHub analysis
     if "error" in summary:
         log_event(f"GitHub analysis failed for {username}: {summary['error']}")
         # Record failure for evaluation
@@ -74,6 +112,11 @@ def portfolio_update(username: str) -> dict:
     # Design: Content generation depends on successful GitHub analysis
     content_start = time.time()
     post = content_generator(summary)
+    if op:
+        op.update_state("generated_post", post)
+        op.pause(
+            {"step": "content_generation_complete"}
+        )  # Checkpoint after content generation
     if "error" in post:
         log_event(f"Content generation failed for {username}: {post['error']}")
         evaluator.record_operation(
@@ -124,9 +167,20 @@ def portfolio_update(username: str) -> dict:
     total_time = time.time() - start_time
     log_event(f"Portfolio update completed for {username} in {total_time:.2f} seconds")
 
+    # Complete long-running operation if it exists
+    if op:
+        op.complete(
+            {
+                "github_summary": summary,
+                "generated_post": post,
+                "file_result": file_result,
+            }
+        )
+
     return {
         "github_summary": summary,
         "generated_post": post,
         "file_result": file_result,
         "execution_time": round(total_time, 2),
+        "operation_id": op.operation_id if op else None,
     }

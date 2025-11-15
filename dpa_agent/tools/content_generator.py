@@ -22,6 +22,7 @@ from typing import Optional
 
 import google.generativeai as genai
 
+from ..context_manager import context_manager
 from ..utils.logging import log_event
 
 
@@ -114,9 +115,19 @@ def content_generator(
     if include_hashtags:
         prompt += f"Add relevant hashtags at the end: {hashtags}\n"
 
+    # Context management: Add prompt to context
+    # Design: Track context usage to manage token limits
+    context_manager.add_context(
+        prompt,
+        role="user",
+        importance=9,  # High importance - this is the main request
+        metadata={"format_style": format_style, "tone": tone, "name": name},
+    )
+
     log_event(
         f"Gemini generation for '{name}' [{format_style}/{tone}] with {repos_count} repos. Prompt preview: {prompt[:150]}..."
     )
+    log_event(f"Context stats: {context_manager.get_context_stats()}")
 
     # Model fallback mechanism
     # Design: Try models in order of preference to support both free and pro API tiers
@@ -134,8 +145,19 @@ def content_generator(
         try:
             model = genai.GenerativeModel(model_name)
             log_event(f"Attempting to generate content with model: {model_name}")
+            # Use context manager for prompt (if context is being used)
+            # For now, use direct prompt, but context is tracked for future use
             response = model.generate_content([prompt])
             content = response.text
+
+            # Add response to context
+            context_manager.add_context(
+                content,
+                role="assistant",
+                importance=8,  # High importance - generated content
+                metadata={"model": model_name, "format_style": format_style},
+            )
+
             log_event(
                 f"Gemini generation success for '{name}' using {model_name}. Output preview: {content[:150]}..."
             )
