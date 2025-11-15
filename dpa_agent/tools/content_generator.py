@@ -1,3 +1,22 @@
+"""
+Content Generation Tool
+
+This module provides AI-powered content generation using Google Gemini.
+It implements custom tools as required by the capstone project.
+
+Design Decisions:
+- Uses Google Generative AI (Gemini) for content generation
+- Implements model fallback mechanism to support both free and pro API tiers
+- Supports multiple content formats (LinkedIn, Blog, README)
+- Configurable tone and style for different use cases
+
+Behavior:
+- Takes GitHub profile data and generates professional portfolio content
+- Tries multiple Gemini models in order of preference
+- Handles API errors gracefully with detailed error messages
+- Logs all generation attempts for observability
+"""
+
 import os
 from typing import Optional
 
@@ -15,38 +34,64 @@ def content_generator(
 ) -> dict:
     """
     Uses Gemini to generate rich content from GitHub data and repo activity.
+
+    This tool implements AI-powered content generation as a custom tool for the agent.
+    It transforms structured GitHub data into engaging portfolio content using
+    Google's Gemini models.
+
+    Design: Implements a model fallback mechanism that tries multiple Gemini models
+    in order of preference. This ensures compatibility with both free-tier and
+    pro-tier API keys, improving reliability and user experience.
+
+    Behavior:
+    - Validates API key from environment variables
+    - Constructs a detailed prompt from GitHub data
+    - Tries multiple Gemini models until one succeeds
+    - Returns generated content or detailed error message
+
     Args:
-        github_summary (dict): Output from github_analyzer tool
-        repo_activity (dict): Output from github_repo_activity tool
-        format_style (str): "LinkedIn", "Blog", or "README"
-        tone (str): "professional", "energetic", "casual", etc.
-        include_hashtags (bool): Add hashtags if True
+        github_summary (dict): Output from github_analyzer tool containing profile data
+        repo_activity (dict, optional): Output from github_repo_activity tool
+        format_style (str): Content format - "LinkedIn", "Blog", or "README"
+        tone (str): Writing tone - "professional", "energetic", "casual", etc.
+        include_hashtags (bool): Whether to include hashtags in the content
+
     Returns:
-        dict: {'content': ...}
+        dict: Dictionary with 'content' key containing generated text, or 'error' key
     """
+    # Retrieve API key from environment
+    # Design: Environment variable approach keeps credentials secure
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         log_event("Gemini API key not found.")
         return {"error": "Gemini API key not found in environment variables."}
 
     try:
+        # Configure Gemini API client
+        # Design: Single configuration point for all model instances
         genai.configure(api_key=api_key)
     except Exception as config_error:
         log_event(f"Failed to configure Gemini API: {str(config_error)}")
         return {"error": f"Failed to configure Gemini API: {str(config_error)}"}
 
+    # Extract relevant data from GitHub summary
+    # Design: Use fallback values to handle missing data gracefully
     name = github_summary.get("name") or github_summary.get("login", "a developer")
     bio = github_summary.get("bio", "")
     repos_count = github_summary.get("public_repos", "N/A")
     followers = github_summary.get("followers", "N/A")
     url = github_summary.get("profile_url", "")
 
+    # Construct system prompt with format and tone instructions
+    # Design: Clear instructions help Gemini generate appropriate content
     system_prompt = (
         f"You are an AI writing assistant helping developers auto-generate portfolio content.\n"
         f"Format: {format_style}. Tone: {tone}."
     )
     hashtags = "#Python #OpenSource #AI " if include_hashtags else ""
 
+    # Build repository activity section if repo_activity is provided
+    # Design: Optional repo activity enriches content but isn't required
     repo_section = ""
     if repo_activity and "repos" in repo_activity:
         repo_section += "Recent repository activity summary:\n"
@@ -57,6 +102,8 @@ def content_generator(
                     f"   - Latest commit: '{commit['message']}' ({commit['date']})\n"
                 )
 
+    # Construct the full prompt for Gemini
+    # Design: Structured prompt with clear sections improves generation quality
     prompt = (
         f"{system_prompt}\n"
         f"Developer profile: Name: {name}. Bio: '{bio}'. GitHub: {url}. "
@@ -71,10 +118,9 @@ def content_generator(
         f"Gemini generation for '{name}' [{format_style}/{tone}] with {repos_count} repos. Prompt preview: {prompt[:150]}..."
     )
 
-    # Try multiple model names in order of preference
-    # gemini-2.0-flash is the free tier model
-    # gemini-1.5-flash requires pro account
-    # gemini-pro is deprecated
+    # Model fallback mechanism
+    # Design: Try models in order of preference to support both free and pro API tiers
+    # This improves reliability and user experience across different API key types
     model_names = [
         "gemini-2.0-flash",  # Free tier model (try first)
         "gemini-2.0-flash-exp",  # Experimental variant
@@ -83,6 +129,7 @@ def content_generator(
     ]
 
     last_error = None
+    # Try each model until one succeeds
     for model_name in model_names:
         try:
             model = genai.GenerativeModel(model_name)
@@ -101,6 +148,7 @@ def content_generator(
             )
             last_error = e
             # If it's a model not found error, try next model
+            # Design: Only retry on "not found" errors - other errors (quota, auth) are fatal
             if "not found" in error_msg.lower() or "404" in error_msg:
                 continue
             # For other errors (quota, auth, etc.), don't try other models
