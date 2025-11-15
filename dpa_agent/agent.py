@@ -21,7 +21,7 @@ Design Decision: Multi-agent architecture allows for:
 from google.adk.agents import Agent
 
 from .a2a_protocol import MessageType, a2a_protocol
-from .memory import PersistentMemoryBank
+from .memory import memory_bank
 from .tools.a2a_tools import (
     get_a2a_message_history,
     process_a2a_messages,
@@ -41,10 +41,9 @@ from .tools.memory_query import get_history
 from .tools.portfolio_update import portfolio_update
 from .tools.portfolio_writer import portfolio_writer
 
-# Initialize persistent memory bank at module level
+# Import memory_bank singleton from memory module
 # This ensures all agents share the same memory instance for consistency
 # Design: Singleton pattern for memory ensures data consistency across agents
-memory_bank = PersistentMemoryBank()
 
 
 def _github_agent_message_handler(message):

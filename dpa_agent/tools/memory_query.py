@@ -17,11 +17,10 @@ Behavior:
 
 from typing import Optional
 
-from ..memory import PersistentMemoryBank
+from ..memory import memory_bank
 
 # Use shared memory bank instance
 # Design: Singleton pattern ensures all tools access the same memory
-memory_bank = PersistentMemoryBank()
 
 
 def get_history(username: Optional[str] = None) -> dict:

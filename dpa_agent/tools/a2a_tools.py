@@ -10,13 +10,13 @@ Design Decisions:
 - Enables distributed task execution across agents
 """
 
-from typing import Dict, Optional
+from typing import Optional, Any
 
 from ..a2a_protocol import MessageType, a2a_protocol
 from ..utils.logging import log_event
 
 
-def send_a2a_request(to_agent: str, payload: Dict, from_agent: str = "dpa_root") -> str:
+def send_a2a_request(to_agent: str, payload: dict, from_agent: str = "dpa_root") -> str:
     """
     Send an A2A request to another agent.
 
@@ -39,7 +39,7 @@ def send_a2a_request(to_agent: str, payload: Dict, from_agent: str = "dpa_root")
     return correlation_id
 
 
-def send_a2a_event(to_agent: str, payload: Dict, from_agent: str = "dpa_root"):
+def send_a2a_event(to_agent: str, payload: dict, from_agent: str = "dpa_root"):
     """
     Send an A2A event notification to another agent.
 
@@ -58,7 +58,7 @@ def send_a2a_event(to_agent: str, payload: Dict, from_agent: str = "dpa_root"):
     log_event(f"A2A event sent from {from_agent} to {to_agent}")
 
 
-def get_a2a_message_history(agent_name: Optional[str] = None, limit: int = 50) -> Dict:
+def get_a2a_message_history(agent_name: Optional[str] = None, limit: int = 50) -> dict:
     """
     Get A2A message history for an agent.
 

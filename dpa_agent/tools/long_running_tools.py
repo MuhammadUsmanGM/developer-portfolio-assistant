@@ -10,15 +10,15 @@ Design Decisions:
 - Enables operations to survive process restarts through persistence
 """
 
-from typing import Dict, Optional
+from typing import Optional, Any
 
 from ..long_running import OperationStatus, operation_manager
 from ..utils.logging import log_event
 
 
 def create_long_running_operation(
-    operation_id: str, operation_type: str, initial_state: Optional[Dict] = None
-) -> Dict:
+    operation_id: str, operation_type: str, initial_state: Optional[dict] = None
+) -> dict:
     """
     Create a new long-running operation.
 
@@ -45,7 +45,7 @@ def create_long_running_operation(
     }
 
 
-def pause_operation(operation_id: str, checkpoint_data: Optional[Dict] = None) -> Dict:
+def pause_operation(operation_id: str, checkpoint_data: Optional[dict] = None) -> dict:
     """
     Pause a long-running operation at a checkpoint.
 
@@ -74,7 +74,7 @@ def pause_operation(operation_id: str, checkpoint_data: Optional[Dict] = None) -
         return {"error": str(e)}
 
 
-def resume_operation(operation_id: str) -> Dict:
+def resume_operation(operation_id: str) -> dict:
     """
     Resume a paused long-running operation.
 
@@ -102,7 +102,7 @@ def resume_operation(operation_id: str) -> Dict:
         return {"error": str(e)}
 
 
-def get_operation_status(operation_id: str) -> Dict:
+def get_operation_status(operation_id: str) -> dict:
     """
     Get the status of a long-running operation.
 
@@ -127,7 +127,7 @@ def get_operation_status(operation_id: str) -> Dict:
     }
 
 
-def list_operations(status: Optional[str] = None) -> Dict:
+def list_operations(status: Optional[str] = None) -> dict:
     """
     List all long-running operations, optionally filtered by status.
 

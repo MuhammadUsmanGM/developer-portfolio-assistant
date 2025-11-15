@@ -139,3 +139,9 @@ class PersistentMemoryBank:
             return [e for e in self.entries if e["username"] == username]
         # Return all entries if no username filter specified
         return self.entries
+
+
+# Create a singleton instance of the memory bank
+# This ensures all modules share the same memory instance
+# Design: Module-level singleton pattern for consistent memory access
+memory_bank = PersistentMemoryBank()
