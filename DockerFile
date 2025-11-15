@@ -1,0 +1,22 @@
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
+
+# Set working directory in the container
+WORKDIR /app
+
+# Copy project files
+COPY . /app
+
+# Install pip and required packages
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Expose port (Cloud Run expects HTTP on port 8080)
+EXPOSE 8080
+
+# Start your agent using gunicorn/uvicorn/Flask/etc. 
+# If you have a Flask/FastAPI wrapper:
+# CMD ["gunicorn", "-b", ":8080", "your_flask_app:app"]
+
+# If you want to run as a CLI container (for demo only):
+CMD ["python", "agent.py"]

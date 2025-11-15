@@ -1,0 +1,61 @@
+2025-11-15 09:11:31,169 INFO Found root_agent in dpa_agent.agent
+2025-11-15 09:11:31,175 INFO Loaded .env file for dpa_agent at C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\dpa_agent\.env
+2025-11-15 09:11:31,187 WARNING App name mismatch detected. The runner is configured with app name "dpa_agent", but the root agent was loaded from "C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\.venv\Lib\site-packages\google\adk\agents", which implies app name "agents".
+2025-11-15 09:12:00,011 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:12:02,400 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:12:02,418 INFO Response received from the model.
+2025-11-15 09:12:02,419 WARNING Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-11-15 09:12:02,428 INFO Running portfolio_update for username: MuhammadUsmanGM
+2025-11-15 09:12:02,428 INFO Attempting GitHub analysis for username: MuhammadUsmanGM
+2025-11-15 09:12:04,902 INFO GitHub analysis successful for MuhammadUsmanGM: {'login': 'MuhammadUsmanGM', 'name': 'Muhammad Usman', 'public_repos': 20, 'followers': 3, 'bio': 'Aspiring AI agent dev | Python & C++ learner | UV projects builder | Exploring high-performance backend tech | Open-source enthusiast ', 'profile_url': 'https://github.com/MuhammadUsmanGM'}
+2025-11-15 09:12:04,908 INFO GitHub analysis succeeded for MuhammadUsmanGM
+2025-11-15 09:12:04,908 INFO Gemini generation for 'Muhammad Usman' [LinkedIn/professional] with 20 repos. Prompt preview: You are an AI writing assistant helping developers auto-generate portfolio content.
+Format: LinkedIn. Tone: professional.
+Developer profile: Name: Muh...
+2025-11-15 09:12:06,779 INFO Gemini API error for 'Muhammad Usman': 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-11-15 09:12:06,780 INFO Content generation failed for MuhammadUsmanGM: Gemini API error: 404 models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-11-15 09:12:12,182 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:12:15,146 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:12:15,157 INFO Response received from the model.
+2025-11-15 09:19:14,349 INFO Found root_agent in dpa_agent.agent
+2025-11-15 09:19:14,353 INFO Loaded .env file for dpa_agent at C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\dpa_agent\.env
+2025-11-15 09:19:14,359 WARNING App name mismatch detected. The runner is configured with app name "dpa_agent", but the root agent was loaded from "C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\.venv\Lib\site-packages\google\adk\agents", which implies app name "agents".
+2025-11-15 09:20:53,485 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:20:55,441 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:20:55,461 INFO Response received from the model.
+2025-11-15 09:20:55,462 WARNING Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-11-15 09:20:55,479 INFO Running portfolio_update for username: MuhammadUsmanGM
+2025-11-15 09:20:55,480 INFO Attempting GitHub analysis for username: MuhammadUsmanGM
+2025-11-15 09:20:57,834 INFO GitHub analysis successful for MuhammadUsmanGM: {'login': 'MuhammadUsmanGM', 'name': 'Muhammad Usman', 'public_repos': 20, 'followers': 3, 'bio': 'Aspiring AI agent dev | Python & C++ learner | UV projects builder | Exploring high-performance backend tech | Open-source enthusiast ', 'profile_url': 'https://github.com/MuhammadUsmanGM'}
+2025-11-15 09:20:57,840 INFO GitHub analysis succeeded for MuhammadUsmanGM
+2025-11-15 09:20:57,841 INFO Successfully initialized Gemini model: gemini-1.5-flash
+2025-11-15 09:20:57,841 INFO Gemini generation for 'Muhammad Usman' [LinkedIn/professional] with 20 repos. Prompt preview: You are an AI writing assistant helping developers auto-generate portfolio content.
+Format: LinkedIn. Tone: professional.
+Developer profile: Name: Muh...
+2025-11-15 09:20:59,607 INFO Gemini API error for 'Muhammad Usman': NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-11-15 09:20:59,607 INFO Content generation failed for MuhammadUsmanGM: Gemini API error (NotFound): 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods. - API quota or rate limit exceeded.
+2025-11-15 09:21:03,128 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:21:05,427 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:21:05,438 INFO Response received from the model.
+2025-11-15 09:25:58,255 INFO Found root_agent in dpa_agent.agent
+2025-11-15 09:25:58,260 INFO Loaded .env file for dpa_agent at C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\dpa_agent\.env
+2025-11-15 09:25:58,266 WARNING App name mismatch detected. The runner is configured with app name "dpa_agent", but the root agent was loaded from "C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\.venv\Lib\site-packages\google\adk\agents", which implies app name "agents".
+2025-11-15 09:26:22,608 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:26:32,567 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:26:32,581 INFO Response received from the model.
+2025-11-15 09:26:32,581 WARNING Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-11-15 09:26:32,590 INFO Running portfolio_update for username: MuhammadUsmanGM
+2025-11-15 09:26:32,591 INFO Attempting GitHub analysis for username: MuhammadUsmanGM
+2025-11-15 09:26:36,363 INFO GitHub analysis successful for MuhammadUsmanGM: {'login': 'MuhammadUsmanGM', 'name': 'Muhammad Usman', 'public_repos': 20, 'followers': 3, 'bio': 'Aspiring AI agent dev | Python & C++ learner | UV projects builder | Exploring high-performance backend tech | Open-source enthusiast ', 'profile_url': 'https://github.com/MuhammadUsmanGM'}
+2025-11-15 09:26:36,377 INFO GitHub analysis succeeded for MuhammadUsmanGM
+2025-11-15 09:26:36,378 INFO Gemini generation for 'Muhammad Usman' [LinkedIn/professional] with 20 repos. Prompt preview: You are an AI writing assistant helping developers auto-generate portfolio content.
+Format: LinkedIn. Tone: professional.
+Developer profile: Name: Muh...
+2025-11-15 09:26:36,378 INFO Attempting to generate content with model: gemini-2.0-flash
+2025-11-15 09:26:39,121 INFO Gemini generation success for 'Muhammad Usman' using gemini-2.0-flash. Output preview: Excited to share a glimpse into my journey as an aspiring AI agent developer! I'm actively building UV projects and diving deep into Python and C++ to...
+2025-11-15 09:26:39,123 INFO Content generation succeeded for MuhammadUsmanGM
+2025-11-15 09:26:39,129 INFO Portfolio entry saved to portfolio_entry.md (success).
+2025-11-15 09:26:39,130 INFO portfolio_writer result for MuhammadUsmanGM: {'status': 'success', 'file': 'portfolio_entry.md'}
+2025-11-15 09:26:42,784 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-15 09:26:47,144 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-15 09:26:47,148 INFO Response received from the model.
