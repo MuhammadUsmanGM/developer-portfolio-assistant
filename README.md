@@ -2,8 +2,10 @@
 
 **Subtitle:** Automatically generate and update your developer portfolio with AI-powered agentic workflows.
 
-![thumbnail](thumbnail1.png)
-![thumbnail](thumbnail.png)
+[![YouTube](https://img.shields.io/badge/YouTube-Project%20Description-red?logo=youtube&logoColor=white)](https://youtu.be/kkxrkFmEKqY?si=wc5l7CvnWiQfRPIH)
+[![thumbnail](thumbnail1.png)](https://youtu.be/kkxrkFmEKqY?si=wc5l7CvnWiQfRPIH)
+[![thumbnail](thumbnail.png)](https://youtu.be/kkxrkFmEKqY?si=wc5l7CvnWiQfRPIH)
+
 
 ## 🚀 Overview
 
