@@ -2,6 +2,7 @@
 
 **Subtitle:** Automatically generate and update your developer portfolio with AI-powered agentic workflows.
 
+![thumbnail](thumbnail1.png)
 ![thumbnail](thumbnail.png)
 
 ## 🚀 Overview
