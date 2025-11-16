@@ -147,3 +147,44 @@ Developer profile: Name: Muh...
 2025-11-15 11:32:50,955 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
 2025-11-15 11:32:53,593 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
 2025-11-15 11:32:53,605 INFO Response received from the model.
+2025-11-16 05:59:32,212 INFO Agent github_analyst registered with A2A protocol
+2025-11-16 05:59:32,213 INFO Agent content_generator_agent registered with A2A protocol
+2025-11-16 05:59:32,215 INFO Agent portfolio_writer_agent registered with A2A protocol
+2025-11-16 05:59:32,216 INFO Agent dpa_root registered with A2A protocol
+2025-11-16 05:59:32,216 INFO Found root_agent in dpa_agent.agent
+2025-11-16 05:59:32,220 WARNING App name mismatch detected. The runner is configured with app name "dpa_agent", but the root agent was loaded from "C:\Users\Usman Mustafa\OneDrive\Desktop\developer-portfolio-assistant\.venv\Lib\site-packages\google\adk\agents", which implies app name "agents".
+2025-11-16 05:59:36,357 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-16 05:59:37,744 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-16 05:59:37,773 INFO Response received from the model.
+2025-11-16 05:59:37,774 WARNING Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-11-16 05:59:37,792 INFO Running portfolio_update for username: MuhammadUsmanGM
+2025-11-16 05:59:37,792 INFO Attempting GitHub analysis for username: MuhammadUsmanGM
+2025-11-16 05:59:40,164 INFO GitHub analysis successful for MuhammadUsmanGM: {'login': 'MuhammadUsmanGM', 'name': 'Muhammad Usman', 'public_repos': 22, 'followers': 3, 'bio': 'Aspiring AI agent dev | Python & C++ learner | UV projects builder | Exploring high-performance backend tech | Open-source enthusiast ', 'profile_url': 'https://github.com/MuhammadUsmanGM'}
+2025-11-16 05:59:40,170 INFO GitHub analysis succeeded for MuhammadUsmanGM
+2025-11-16 05:59:40,171 INFO Added context: 130 tokens, total: 130/32000
+2025-11-16 05:59:40,171 INFO Gemini generation for 'Muhammad Usman' [LinkedIn/professional] with 22 repos. Prompt preview: You are an AI writing assistant helping developers auto-generate portfolio content.
+Format: LinkedIn. Tone: professional.
+Developer profile: Name: Muh...
+2025-11-16 05:59:40,172 INFO Context stats: {'current_tokens': 130, 'max_tokens': 32000, 'usage_percent': 0.40625, 'entries_count': 1, 'important_entries': 1, 'compaction_strategy': 'importance'}
+2025-11-16 05:59:40,172 INFO Attempting to generate content with model: gemini-2.0-flash
+2025-11-16 05:59:42,008 INFO Added context: 174 tokens, total: 304/32000
+2025-11-16 05:59:42,009 INFO Gemini generation success for 'Muhammad Usman' using gemini-2.0-flash. Output preview: Aspiring AI agent developer Muhammad Usman is making waves in the open-source community!  With a strong foundation in Python and C++, Muhammad is act...
+2025-11-16 05:59:42,009 INFO Content generation succeeded for MuhammadUsmanGM
+2025-11-16 05:59:42,010 INFO Content quality score: 100.0/100
+2025-11-16 05:59:42,012 INFO Portfolio entry saved to portfolio_entry.md (success).
+2025-11-16 05:59:42,012 INFO portfolio_writer result for MuhammadUsmanGM: {'status': 'success', 'file': 'portfolio_entry.md'}
+2025-11-16 05:59:42,015 INFO Portfolio update saved to memory for MuhammadUsmanGM
+2025-11-16 05:59:42,016 INFO Portfolio update completed for MuhammadUsmanGM in 4.22 seconds
+2025-11-16 05:59:45,903 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-16 05:59:47,331 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-16 05:59:47,337 INFO Response received from the model.
+2025-11-16 06:02:01,135 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-16 06:02:02,398 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-16 06:02:02,404 INFO Response received from the model.
+2025-11-16 06:02:36,375 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-16 06:02:38,966 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-16 06:02:38,980 INFO Response received from the model.
+2025-11-16 06:02:38,982 WARNING Warning: there are non-text parts in the response: ['function_call'], returning concatenated text result from text parts. Check the full candidates.content.parts accessor to get the full model response.
+2025-11-16 06:02:42,815 INFO Sending out request, model: gemini-2.5-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-11-16 06:02:46,740 INFO HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-16 06:02:46,754 INFO Response received from the model.
